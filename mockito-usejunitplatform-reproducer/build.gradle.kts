@@ -27,8 +27,10 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
 
-    testImplementation("org.mockito:mockito-junit-jupiter:3.10.0")
-    testImplementation("com.nhaarman:mockito-kotlin:1.6.0")
+//    testImplementation("org.mockito:mockito-junit-jupiter:3.10.0")
+//    testImplementation("com.nhaarman:mockito-kotlin:1.6.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.15.2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0") // Migrated from com.nhaarman:mockito-kotlin
 
     testImplementation(enforcedPlatform("org.junit:junit-bom:[5.7.1]"))
     testImplementation("org.junit.jupiter:junit-jupiter")

@@ -1,7 +1,3 @@
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.anyOrNull
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.mock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.example.Logger
@@ -11,6 +7,9 @@ import org.example.Service
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
+import org.mockito.kotlin.any
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
 import kotlin.test.Ignore
 import kotlin.test.assertEquals
 
@@ -26,7 +25,7 @@ class MainTest {
     }
 
     @Test
-    @Ignore
+//    @Ignore // No need to ignore with mockito 5
     fun `Initial test implementation`() = runBlocking {
         Mockito.`when`(
             service.getValue(
