@@ -30,7 +30,7 @@ class MainTest {
     fun `Initial test implementation`() = runBlocking {
         Mockito.`when`(
             service.getValue(
-                logger = any(),
+                logger = logger,
                 request = Request(1, "Test")
             )
         ).thenReturn("Mocked value")
