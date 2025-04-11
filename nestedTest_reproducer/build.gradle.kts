@@ -21,7 +21,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-    maxParallelForks = 8
+    maxParallelForks = 10
 }
 kotlin {
     jvmToolchain(11)

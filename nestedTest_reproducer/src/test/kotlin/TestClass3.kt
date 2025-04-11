@@ -90,4 +90,34 @@ class TestClass3 {
         @Test
         fun test39() = runBlocking { delay(1000) }
     }
+
+    @Nested
+    inner class TestClass3_Nested_Inner_Annotated_Class {
+        @Test
+        fun test31() = runBlocking { delay(1000) }
+
+        @Test
+        fun test32() = runBlocking { delay(1000) }
+
+        @Test
+        fun test33() = runBlocking { delay(1000) }
+
+        @Test
+        fun test34() = runBlocking { delay(1000) }
+
+        @Test
+        fun test35() = runBlocking { delay(1000) }
+
+        @Test
+        fun test36() = runBlocking { delay(1000) }
+
+        @Test
+        fun test37() = runBlocking { delay(1000) }
+
+        @Test
+        fun test38() = runBlocking { delay(1000) }
+
+        @Test
+        fun test39() = runBlocking { delay(1000) }
+    }
 }
