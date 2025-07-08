@@ -34,18 +34,20 @@ jobs:
               run: sed -i 's/isRequired = providers.environmentVariable("CI").isPresent/isRequired = false/' build.gradle.kts
 
             - name: Publish to maven local
-              run: ./gradlew clean publishToMavenLocal -x signPluginMavenPublication -x signCommonCustomUserDataPluginMarkerMavenPublication -Dgradle.cache.remote.push=false
+              run: ./gradlew clean publishToMavenLocal -Dgradle.cache.remote.push=false
 
             - name: Modify the project to use the local plugin
               run: |
-                echo """ pluginManagement {
-                  repositories {
-                  mavenLocal()
-                  gradlePluginPortal()
-                  mavenCentral()
-                }
-                }""" > settings.gradle
+                sed -i '1i\
+                  pluginManagement {\
+                  repositories {\
+                  mavenLocal()\
+                  gradlePluginPortal()\
+                  mavenCentral()\
+                }}\
+                ' settings.gradle.kts
                 sed -i 's/\(id("com.gradle.common-custom-user-data-gradle-plugin") version "\)[0-9.]\+"/\12+"/' settings.gradle.kts
+                cat settings.gradle.kts
 
             - name: Run a build with the local plugin
-              run: ./gradlew clean build -x signPluginMavenPublication -x signCommonCustomUserDataPluginMarkerMavenPublication -Dgradle.cache.remote.push=false
+              run: ./gradlew clean build -i -Dgradle.cache.remote.push=false
