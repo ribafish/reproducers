@@ -1,0 +1,48 @@
+name: Test Common Custom User Data Gradle Plugin on GHA
+on:
+    workflow_dispatch:
+      inputs:
+        branch:
+          description: "Branch to test"
+          required: false
+          default: "main"
+    push:
+        paths:
+        - ".github/workflows/test_ccud_gradle.yml"
+jobs:
+    test_ccud_gradle:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                repository: gradle/common-custom-user-data-gradle-plugin
+                ref: ${{ github.event.inputs.branch || 'main' }}
+
+            - name: Set up JDK 21
+              uses: actions/setup-java@v4
+              with:
+                  java-version: '21'
+                  distribution: 'temurin'
+
+            - name: Set up Gradle
+              uses: gradle/actions/setup-gradle@v4
+              with:
+                  develocity-access-key: ${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}
+
+            - name: Publish to maven local
+              run: ./gradlew clean publishToMavenLocal -x signPluginMavenPublication -i -Porg.gradle.java.installations.auto-download=false -Dgradle.cache.remote.push=false
+
+            - name: Modify the project to use the local plugin
+              run: |
+                echo """ pluginManagement {
+                  repositories {
+                  mavenLocal()
+                  gradlePluginPortal()
+                  mavenCentral()
+                }
+                }""" > settings.gradle
+                sed -i 's/\(id("com.gradle.common-custom-user-data-gradle-plugin") version "\)[0-9.]\+"/\12+"/' settings.gradle.kts
+
+            - name: Run a build with the local plugin
+              run: ./gradlew clean build -x signPluginMavenPublication -i -Porg.gradle.java.installations.auto-download=false -Dgradle.cache.remote.push=false
