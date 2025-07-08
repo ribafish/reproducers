@@ -30,6 +30,9 @@ jobs:
               with:
                   develocity-access-key: ${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}
 
+            - name: Disable signing on CI
+              run: sed -i 's/isRequired = providers.environmentVariable("CI").isPresent/isRequired = false/' build.gradle.kts
+
             - name: Publish to maven local
               run: ./gradlew clean publishToMavenLocal -x signPluginMavenPublication -x signCommonCustomUserDataPluginMarkerMavenPublication -Dgradle.cache.remote.push=false
 
