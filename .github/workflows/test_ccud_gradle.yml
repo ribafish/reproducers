@@ -46,8 +46,7 @@ jobs:
                   mavenCentral()\
                 }}\
                 ' settings.gradle.kts
-                sed -i 's/\(id("com.gradle.common-custom-user-data-gradle-plugin") version "\)[0-9.]\+"/\12+"/' settings.gradle.kts
-                cat settings.gradle.kts
-
+                sed -i -E 's/(id\("com.gradle.common-custom-user-data-gradle-plugin"\) version )"2[0-9\.]*"/\1"2+"/' settings.gradle.kts
+                
             - name: Run a build with the local plugin
               run: ./gradlew clean build -i -Dgradle.cache.remote.push=false
