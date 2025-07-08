@@ -31,7 +31,7 @@ jobs:
                   develocity-access-key: ${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}
 
             - name: Publish to maven local
-              run: ./gradlew clean publishToMavenLocal -x signPluginMavenPublication -i -Porg.gradle.java.installations.auto-download=false -Dgradle.cache.remote.push=false
+              run: ./gradlew clean publishToMavenLocal -x signPluginMavenPublication -x signCommonCustomUserDataPluginMarkerMavenPublication -Dgradle.cache.remote.push=false
 
             - name: Modify the project to use the local plugin
               run: |
@@ -45,4 +45,4 @@ jobs:
                 sed -i 's/\(id("com.gradle.common-custom-user-data-gradle-plugin") version "\)[0-9.]\+"/\12+"/' settings.gradle.kts
 
             - name: Run a build with the local plugin
-              run: ./gradlew clean build -x signPluginMavenPublication -i -Porg.gradle.java.installations.auto-download=false -Dgradle.cache.remote.push=false
+              run: ./gradlew clean build -x signPluginMavenPublication -x signCommonCustomUserDataPluginMarkerMavenPublication -Dgradle.cache.remote.push=false
