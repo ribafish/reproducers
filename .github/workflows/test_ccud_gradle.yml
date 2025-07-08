@@ -3,7 +3,7 @@ on:
     workflow_dispatch:
       inputs:
         branch:
-          description: "Branch to test"
+          description: "CCUD Gradle branch to test"
           required: false
           default: "main"
     push:
@@ -31,12 +31,15 @@ jobs:
                   develocity-access-key: ${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}
 
             - name: Disable signing on CI
+              id: disable_signing
               run: sed -i 's/isRequired = providers.environmentVariable("CI").isPresent/isRequired = false/' build.gradle.kts
 
             - name: Publish to maven local
+              id: publish_to_maven_local
               run: ./gradlew clean publishToMavenLocal -Dgradle.cache.remote.push=false
 
             - name: Modify the project to use the local plugin
+              id: modify_project
               run: |
                 sed -i '1i\
                   pluginManagement {\
@@ -47,6 +50,7 @@ jobs:
                 }}\
                 ' settings.gradle.kts
                 sed -i -E 's/(id\("com.gradle.common-custom-user-data-gradle-plugin"\) version )"2[0-9\.]*"/\1"2+"/' settings.gradle.kts
-                
+
             - name: Run a build with the local plugin
+              id: run_build_with_local_plugin
               run: ./gradlew clean build -i -Dgradle.cache.remote.push=false
