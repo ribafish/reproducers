@@ -25,6 +25,49 @@ plugins {
 }
 ```
 
+## Advanced Setup
+
+### Using Shared Settings Files with Custom Repositories
+
+When using a composite build with custom repositories and a shared settings file, `pluginManagement` blocks get merged together. This is unavoidable—there's no way to prevent this merging. However, you can control whether the default Gradle Plugin Portal is included.
+
+**Critical requirement**: If you define a `pluginManagement.repositories` block in any settings file (including shared settings files), you must explicitly define at least one repository. Without explicit repositories, Gradle will add the default Gradle Plugin Portal to your configuration, which may not be desired.
+
+1. **Create a shared settings file** (`common-settings.gradle.kts`):
+```kotlin
+pluginManagement {
+    repositories {
+        maven("your-custom-repo-url")
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    repositories {
+        maven("your-dependency-repo-url")
+    }
+}
+```
+
+2. **Apply the shared settings and define repositories in each settings file** that has `pluginManagement`:
+```kotlin
+// In settings.gradle.kts and any subproject settings.gradle.kts that uses plugins
+apply(from = "common-settings.gradle.kts")
+
+pluginManagement {
+    includeBuild("develocity-configuration-plugin")
+    repositories {
+        maven("your-custom-repo-url")
+    }
+}
+
+plugins {
+    id("com.example.develocity-configuration")
+}
+```
+
+Since `pluginManagement` blocks are merged when you apply a shared settings file, explicitly defining `repositories` in each `pluginManagement` block ensures you have full control over which repositories are available and prevents the default Gradle Plugin Portal from being implicitly added.
+
 ## Configuration
 
 The plugin automatically:
