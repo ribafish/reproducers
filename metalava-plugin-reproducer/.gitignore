@@ -1,0 +1,33 @@
+# Gradle
+.gradle/
+build/
+*.apk
+*.aab
+
+# Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+
+# Local configuration
+local.properties
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Kotlin
+*.kt.bak
+kotlin_extension_stub/
+
+# Misc
+*.swp
+*.swo
+*~
+.classpath
+.project
+.settings/

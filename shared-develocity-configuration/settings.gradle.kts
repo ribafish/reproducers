@@ -2,7 +2,7 @@ pluginManagement {
     includeBuild("develocity-configuration-plugin")
     repositories {
         // Required for the develocity plugin, otherwise it gets taken from gradlePluginPortal
-        maven("https://your/gradle-plugins-remote")
+        maven("https://plugins.gradle.org/m2/")
     }
 }
 
