@@ -11,5 +11,14 @@ class MainActivity : AppCompatActivity() {
 
         val message = Lib1Utils.getMessage()
         android.util.Log.d("MainActivity", message)
+
+        val userMessage = Lib1Utils.processUserData("Alice")
+        android.util.Log.d("MainActivity", userMessage)
+
+        val calcMessage = Lib1Utils.computeAndFormat(10, 20)
+        android.util.Log.d("MainActivity", calcMessage)
+
+        val (isValid, validationMessage) = Lib1Utils.validateUserInput("TestInput")
+        android.util.Log.d("MainActivity", "Valid: $isValid, Message: $validationMessage")
     }
 }
