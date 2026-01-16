@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
+    id("me.tylerbwong.gradle.metalava")
 }
+
+configureMetalava()
 
 android {
     namespace = "com.example.lib3"

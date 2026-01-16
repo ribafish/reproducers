@@ -1,5 +1,15 @@
 plugins {
     id("com.android.application")
+    id("me.tylerbwong.gradle.metalava")
+}
+
+configureMetalava()
+
+
+subprojects {
+    afterEvaluate {
+//        println("$project -> metalava extension filename: ${metalava.filename}")
+    }
 }
 
 android {
