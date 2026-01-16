@@ -33,5 +33,11 @@ dependencyResolutionManagement {
     }
 }
 
+buildCache {
+    local {
+        directory = File(rootDir, "build-cache")
+    }
+}
+
 rootProject.name = "MultiModuleApp"
 include(":app", ":lib1", ":lib2", ":lib3")
