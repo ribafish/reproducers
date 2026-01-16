@@ -22,3 +22,10 @@ android {
 dependencies {
     implementation(project(":lib2"))
 }
+
+//metalava {
+//    if (project.hasProperty("fixMetalava")) {
+//        println("Fixing metalava filename for lib1 module")
+//        filename.set("lib1-api.txt")
+//    }
+//}

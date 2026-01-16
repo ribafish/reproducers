@@ -22,3 +22,9 @@ android {
 dependencies {
     api(project(":lib3"))
 }
+
+//metalava {
+//    if (project.hasProperty("fixMetalava")) {
+//        filename.set("lib2-api.txt")
+//    }
+//}

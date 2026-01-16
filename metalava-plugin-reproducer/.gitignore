@@ -31,3 +31,6 @@ kotlin_extension_stub/
 .classpath
 .project
 .settings/
+
+build-cache/
+api.txt

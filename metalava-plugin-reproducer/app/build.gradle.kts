@@ -5,13 +5,6 @@ plugins {
 
 configureMetalava()
 
-
-subprojects {
-    afterEvaluate {
-//        println("$project -> metalava extension filename: ${metalava.filename}")
-    }
-}
-
 android {
     namespace = "com.example.app"
     compileSdk = 34
@@ -39,3 +32,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 }
+
+//if (project.hasProperty("fixMetalava")) {
+//    println("Fixing metalava filename for app module")
+//    metalava {
+//            filename.set("app-api.txt")
+//    }
+//}
