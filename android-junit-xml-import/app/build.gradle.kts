@@ -20,6 +20,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions += "env"
+    productFlavors {
+        create("demo") {
+            dimension = "env"
+            applicationIdSuffix = ".demo"
+        }
+        create("full") {
+            dimension = "env"
+            applicationIdSuffix = ".full"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -31,6 +43,11 @@ android {
                 create("pixel2Api30") {
                     device = "Pixel 2"
                     apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+                create("pixel6Api34") {
+                    device = "Pixel 6"
+                    apiLevel = 34
                     systemImageSource = "aosp-atd"
                 }
             }
