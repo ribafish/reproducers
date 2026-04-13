@@ -5,7 +5,6 @@ import com.gradle.develocity.agent.gradle.test.JUnitXmlDialect
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -24,10 +23,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     testOptions {
@@ -54,14 +49,14 @@ afterEvaluate {
         ImportJUnitXmlReports.register(
             tasks,
             tasks.named(it),
-            JUnitXmlDialect.ANDROID_CONNECTED
+            JUnitXmlDialect.GENERIC
         )
     }
     tasks.withType<ManagedDeviceInstrumentationTestTask>().names.forEach {
         ImportJUnitXmlReports.register(
             tasks,
             tasks.named(it),
-            JUnitXmlDialect.ANDROID_CONNECTED
+            JUnitXmlDialect.GENERIC
         )
     }
 }
