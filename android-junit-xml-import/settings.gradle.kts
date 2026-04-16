@@ -3,11 +3,12 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        mavenLocal()
     }
 }
 
 plugins {
-    id("com.gradle.develocity") version "4.0.2"
+    id("com.gradle.develocity") version "4.4.1-prerelease"
 }
 
 develocity {

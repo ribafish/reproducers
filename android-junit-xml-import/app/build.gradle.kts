@@ -66,14 +66,14 @@ afterEvaluate {
         ImportJUnitXmlReports.register(
             tasks,
             tasks.named(it),
-            JUnitXmlDialect.GENERIC
+            JUnitXmlDialect.ANDROID_CONNECTED
         )
     }
     tasks.withType<ManagedDeviceInstrumentationTestTask>().names.forEach {
         ImportJUnitXmlReports.register(
             tasks,
             tasks.named(it),
-            JUnitXmlDialect.GENERIC
+            JUnitXmlDialect.ANDROID_CONNECTED
         )
     }
 }
